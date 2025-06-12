@@ -1,22 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
-const userRouter = require("./routes/userRoutes")
-
+s
 require("dotenv").config();
 
-const app = express();
+const app = require("./app");
+const port = process.env.PORT || 3000;
 
-// Middlewares
-app.use(cors({ origin: "*" }));
-app.use(express.json());
-
-// Rutas
-app.get("/", (req, res) => {
-  res.send("API funcionando");
+const server = app.listen(port, () => {
+  console.log(`App running on port ${port}... 🔗`);
 });
 
-app.use('/api/v1/users', userRouter);
+// Rutas
+// app.get("/", (req, res) => {
+//   res.send("API funcionando");
+// });
 
 const DB = process.env.MONGO_URI.replace(
   "<db_password>",
@@ -24,13 +21,20 @@ const DB = process.env.MONGO_URI.replace(
 );
 // console.log("URI Final:", DB); // 👉 muestra la URI que se va a usar
 
-// Conexión MongoDB
+
+// Connect methods
 mongoose
   .connect(DB)
-  .then(() => {
-    console.log("Connecting to MongoDB...");
-    app.listen(process.env.PORT || 8080, () => {
-      console.log(`DB Connection successful 🎉: ${process.env.PORT || 5000}`);
-    });
-  })
-  .catch((err) => console.error(err));
+  .then(() => console.log("DB Connection successful 🎉"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1); // Para salir si falla
+  });
+
+process.on("unhandledRejection", (err) => {
+  console.log("UNHANDLED REJECTION 💥 Shutting down");
+  console.log(err.name, err.message);
+  server.close(() => {
+    process.exit(1);
+  });
+});
