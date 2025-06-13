@@ -16,3 +16,13 @@ exports.getAllWorkouts = catchAsync(async (req, res, next) => {
     data: { workouts },
   });
 });
+
+// POST create  => GET Method
+exports.createWorkout = catchAsync(async (req, res, next) => {
+  const newWorkout = await Workout.create(req.body);
+
+  res.status(201).json({
+    status: "Created workout successfully",
+    data: { newWorkout },
+  });
+});

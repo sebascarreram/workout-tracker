@@ -2,11 +2,12 @@ const mongoose = require("mongoose");
 
 const workoutSchema = new mongoose.Schema(
   {
-    date: { type: Date, required: true },
-    type: { type: String, required: true }, // CrossFit, pesas, etc.
+    date: { type: Date, required: [true, 'A date workout is required'] },
+    type: { type: String, required: [true, 'A type workout is required'] }, // CrossFit, pesas, etc.
     exercises: [
       {
         name: String,
+        rounds: Number,
         reps: Number,
         weight: Number,
         duration: String,

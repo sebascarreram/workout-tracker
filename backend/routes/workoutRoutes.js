@@ -6,7 +6,8 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(workoutController.getAllWorkouts);
+  .get(workoutController.getAllWorkouts)
+  .post(workoutController.createWorkout);
 
 // router.route("/:id").get(userController.getWorkout);
 
