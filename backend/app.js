@@ -37,6 +37,11 @@ app.use(mongoSanitize());
 // Data sanitization againist XSS
 // app.use(xss());
 
+// Body parser, reading data from body int req.body
+// for application/json
+// app.use(express.json());
+app.use(express.json({ limit: '10kb' }));
+
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/workouts", workoutRouter);
 
