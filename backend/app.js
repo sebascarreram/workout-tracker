@@ -9,6 +9,7 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 
 const userRouter = require("./routes/userRoutes");
+const workoutRouter = require("./routes/workoutRoutes")
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use(mongoSanitize());
 // app.use(xss());
 
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/workouts", workoutRouter);
 
 app.all("*", (req, res, next) => {
   ////// There is three(3) ways for response Error
