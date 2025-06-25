@@ -30,16 +30,12 @@ Este es el backend de una aplicación diseñada para que entrenadores creen ruti
 ## 📦 Estructura del proyecto
 
 /src
+
  ├── controllers
-
  ├── models
-
  ├── routes
-
  ├── middlewares
-
  ├── config
-
  └── app.js
 
 
