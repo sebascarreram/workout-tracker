@@ -31,10 +31,15 @@ Este es el backend de una aplicación diseñada para que entrenadores creen ruti
 
 /src
  ├── controllers
+
  ├── models
+
  ├── routes
+
  ├── middlewares
+
  ├── config
+
  └── app.js
 
 
